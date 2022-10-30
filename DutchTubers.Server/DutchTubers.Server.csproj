@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<ClientApp>ClientApp/</ClientApp>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Deterministic>False</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Deterministic>False</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\data\apis\VTubersApi.ts" />
+    <None Remove="ClientApp\src\data\models\CacheMeta.ts" />
+    <None Remove="ClientApp\src\data\models\StreamInfo.ts" />
+    <None Remove="ClientApp\src\data\models\VTuber.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TwitchLib.Api" Version="3.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\data\apis\VTubersApi.ts" />
+    <TypeScriptCompile Include="ClientApp\src\data\models\CacheMeta.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\data\models\StreamInfo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\data\models\VTuber.ts" />
+  </ItemGroup>
+
+  <Target Name="BuildVueApp" BeforeTargets="Build">
+    <Exec WorkingDirectory="$(ClientApp)" Command="npx tailwindcss -i ./tailwind.css -o ./src/assets/tailwind.css" />
+    <Exec WorkingDirectory="$(ClientApp)" Command="npm run build" />
+  </Target>
+</Project>
