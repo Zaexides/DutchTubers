@@ -27,6 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	<Content Include="ClientApp\dist\**">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\data\apis\VTubersApi.ts" />
     <TypeScriptCompile Include="ClientApp\src\data\models\CacheMeta.ts">
       <SubType>Code</SubType>
